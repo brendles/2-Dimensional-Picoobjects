@@ -1,0 +1,130 @@
+--item = (melee)    -- item picker
+equipped= (2)     -- equip=0/1/2 {} and contains references to item via switch (1==gun,2==bat,etc)
+p1   = {}         --
+p1.x = 64
+p1.y = 64
+fps  = 30
+
+function _init()  -- put  things
+ cls()            -- that run at
+end               -- game start
+                  -- here
+
+function _update()
+ cls() -- extra cls for cleanliness
+--movement
+if (btnp(0)) then p1.x=p1.x-2 end
+if (btnp(1)) then p1.x=p1.x+2 end
+if (btnp(2)) then p1.y=p1.y-2 end
+if (btnp(3)) then p1.y=p1.y+2 end
+--side buttons
+--if (btn(4))  then  end
+--if (btnp(5)) then  end
+-- 0 is up, 1 right, 
+-- 2  down, 3 left
+
+--if (btnp(0)) then p1.dir = p1.dir-1 end
+--if (btnp(1)) then p1.dir = p1.dir+1 end
+
+
+--if (p1.dir > 4) then p1.dir = 1 end
+--if (p1.dir < 1) then p1.dir = 4 end
+
+end
+
+-- -- -- -- -- -- -- -- -- -- 
+
+function _draw()
+ pset(p1.x, p1.y,120)  -- player. pset draws a pixel at location
+
+--bare hands/none
+if equipped==0 then
+ --character is now a cat
+ spr(003,p1.x-1,p1.y-2)
+ --meow
+ if btnp(4) then
+  sfx(1)
+ end
+else if equipped>0 then
+--equipment
+ --melee weapon
+ if equipped==2 then
+  --slice 
+  if btnp(4) then
+  --woosh
+  spr(043,p1.x+9,p1.y-2)
+    spr(027,p1.x+7,p1.y-5)
+    --blade slashing down
+    sfx(13)
+      --sword swinging
+      --swinging 001
+      spr(039,p1.x+5,p1.y-2) 
+       --hilt, mid
+        spr(042,p1.x+1,p1.y+2)
+          --swinging 002
+          spr(040,p1.x+5,p1.y+1)
+          --hilt, mid
+          spr(042,p1.x+1,p1.y+2)
+           --hilt, down
+           --swinging 003
+           spr(056,p1.x+5,p1.y+7)
+          --hilt, down
+          spr(058,p1.x+1,p1.y+2)
+         --blade down,end
+         spr(024,p1.x+5,p1.y+7)
+  --blade flame
+  spr(025,p1.x+13,p1.y+7)
+  end
+  --ready stance
+  if not btnp(4) then
+  spr(009,p1.x+2,p1.y-4)
+  spr(008,p1.x+5,p1.y-7)
+  end
+ end
+ --gun
+ if equipped==1 then
+  spr(010,p1.x,   p1.y) -- gun == topleft of sprite)=topleft(playerx+y)
+  spr(011,p1.x+ 8,p1.y) -- barrel of gun
+--attacking animation
+  if btnp(4)==true then
+  sfx(9)
+  spr(012,p1.x+15,p1.y) -- spray
+  spr(013,p1.x+23,p1.y) -- explo
+  spr(014,p1.x+31,p1.y) --  sion
+  spr(028,p1.x+15,p1.y+8)-- part
+  spr(029,p1.x+23,p1.y+8)-- icle
+  spr(030,p1.x+31,p1.y+8)-- fx
+---recoil fx
+  if btnp(4)==true then
+   sfx(3)
+   p1.x=p1.x-1
+  end
+  
+
+
+-- todo:
+-- menu
+--
+-- frame management
+-- 
+-- character + anim
+--
+-- >3 frame anim
+end
+end
+end
+end
+end
+
+-------------------------------
+--~*~*~*~*~*~*~*~*~*~*~*~*~*~--
+--~----completed zone!!!----~--
+--~-put stuff you feel good-~--
+--~-about completing here!--~--
+--~~*~*~*~*~*~*~*~*~*~*~*~*~~--
+-------------------------------
+-- 12/27/05
+-- i finished making a basic
+-- equipment function pretty
+-- much. i am understanding the
+-- fundamentals!!

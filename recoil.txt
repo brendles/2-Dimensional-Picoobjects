@@ -1,0 +1,59 @@
+item = spr(010) -- gun handle
+equip= 0        -- equip=1/0 or {} and contains references to item via switch (1==gun,2==bat,etc)
+p1   = {}
+p1.x = 64
+p1.y = 64
+fps  = 30
+
+
+function _init()  -- put  things
+ cls()            -- that run at
+end               -- game start
+                  -- here
+
+function _update()
+ cls() -- extra cls for cleanliness
+if (btnp(0)) then p1.x=p1.x-2 end
+if (btnp(1)) then p1.x=p1.x+2 end
+if (btnp(2)) then p1.y=p1.y-2 end
+if (btnp(3)) then p1.y=p1.y+2 end
+if (btn(4))  then  end
+if (btnp(5)) then  end
+-- 0 is up, 1 right, 
+-- 2  down, 3 left
+
+--if (btnp(0)) then p1.dir = p1.dir-1 end
+--if (btnp(1)) then p1.dir = p1.dir+1 end
+
+
+--if (p1.dir > 4) then p1.dir = 1 end
+--if (p1.dir < 1) then p1.dir = 4 end
+
+end
+
+function _draw()
+ pset(p1.x, p1.y,120)  -- player. pset draws a pixel at location
+--equipment
+ spr(010,p1.x,   p1.y) -- gun == topleft of sprite)=topleft(playerx+y)
+ spr(011,p1.x+ 8,p1.y) -- barrel of gun
+--attacking animation
+if btnp(4)==true then
+ sfx(9)
+ spr(012,p1.x+15,p1.y) -- spray
+ spr(013,p1.x+23,p1.y) -- explo
+ spr(014,p1.x+31,p1.y) --  sion
+ spr(028,p1.x+15,p1.y+8)-- part
+ spr(029,p1.x+23,p1.y+8)-- icle
+ spr(030,p1.x+31,p1.y+8)-- fx
+--
+if btnp(4)==true then
+ sfx(3)
+ p1.x=p1.x-3
+end
+-- todo:frame
+-- management
+
+ 
+end
+
+end
